@@ -39,7 +39,7 @@ public class ClienteController {
             @Valid @ModelAttribute("cliente") Cliente cliente,
             BindingResult result) {
 
-        if (result.hasErrors()) {
+        if(result.hasErrors()) {
             return "clientes/formulario";
         }
 

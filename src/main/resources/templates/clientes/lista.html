@@ -3,113 +3,200 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Clientes</title>
+    <title>ADJD Telecom - Clientes</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
           rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+
 </head>
 
-<body class="bg-light">
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
 
-<div class="container mt-5">
+<nav class="bg-[#1e293b] text-white px-8 py-4 flex justify-between items-center shadow-sm">
 
-    <div class="card shadow">
+    <div class="flex items-center gap-2">
 
-        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <div class="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center font-bold text-sm">
+            ADJD
+        </div>
 
-            <h3 class="mb-0">
-                Clientes
-            </h3>
+        <span class="font-semibold text-lg tracking-tight">
+            ADJD Telecomunicaciones
+        </span>
 
-            <a th:href="@{/clientes/nuevo}"
-               class="btn btn-light btn-sm">
-                Crear Nuevo Cliente
-            </a>
+    </div>
+
+    <div class="flex items-center gap-6 text-sm text-gray-300">
+
+        <a th:href="@{/home}"
+           class="hover:text-white transition">
+
+            Inicio
+
+        </a>
+
+        <a th:href="@{/clientes}"
+           class="text-white font-medium border-b-2 border-white pb-1">
+
+            Clientes
+
+        </a>
+
+        <a th:href="@{/vendedores}"
+           class="hover:text-white transition">
+
+            Vendedores
+
+        </a>
+
+        <a th:href="@{/planes}"
+           class="hover:text-white transition">
+
+            Planes
+
+        </a>
+
+    </div>
+
+</nav>
+
+<main class="max-w-7xl mx-auto mt-12 px-6">
+
+    <div class="flex justify-between items-center mb-8">
+
+        <div>
+
+            <h1 class="text-2xl font-bold text-[#0f172a]">
+                Clientes Registrados
+            </h1>
+
+            <p class="text-sm text-[#64748b]">
+                Gestiona la información de los clientes del sistema
+            </p>
 
         </div>
 
-        <div class="card-body">
+        <a th:href="@{/clientes/nuevo}"
+           class="bg-[#334155] hover:bg-[#1e293b] text-white text-sm font-medium px-5 py-2.5 rounded-xl transition shadow-sm flex items-center gap-2">
 
-            <table class="table table-striped table-hover">
+            <span>+</span> Registrar Cliente
 
-                <thead class="table-dark">
+        </a>
 
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Cédula</th>
-                    <th>Correo</th>
-                    <th>Teléfono</th>
-                    <th>Dirección</th>
-                    <th>Acciones</th>
-                </tr>
+    </div>
 
-                </thead>
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
 
-                <tbody>
+        <table class="w-full text-left border-collapse">
 
-                <tr th:if="${#lists.isEmpty(listaClientes)}">
+            <thead>
 
-                    <td colspan="6"
-                        class="text-center text-muted">
+            <tr class="bg-[#f1f5f9] border-b border-gray-100 text-xs font-semibold uppercase tracking-wider text-[#475569]">
 
-                        No hay clientes registrados en el sistema.
+                <th class="py-4 px-6">ID</th>
 
-                    </td>
+                <th class="py-4 px-6">Cédula</th>
 
-                </tr>
+                <th class="py-4 px-6">Nombre Completo</th>
 
-                <tr th:each="c : ${listaClientes}">
+                <th class="py-4 px-6">Teléfono</th>
 
-                    <td th:text="${c.id}">1</td>
+                <th class="py-4 px-6">Dirección</th>
 
-                    <td th:text="${c.nombre}">
-                        Juan Pérez
-                    </td>
-                    <td th:text="${c.cedula}">1234567890</td>
+                <th class="py-4 px-6">Correo</th>
 
-                    <td th:text="${c.correo}">
-                        correo@gmail.com
-                    </td>
+                <th class="py-4 px-6 text-center">Acciones</th>
 
-                    <td th:text="${c.telefono}">
-                        3001234567
-                    </td>
+            </tr>
 
-                    <td th:text="${c.direccion}">
-                        Calle 10 #20-30
-                    </td>
+            </thead>
 
-                    <td>
+            <tbody class="divide-y divide-gray-100 text-sm text-[#334155]">
 
-                        <a th:href="@{/clientes/editar/{id}(id=${c.id})}"
-                           class="btn btn-warning btn-sm">
+            <tr th:each="cliente : ${listaClientes}"
+                class="hover:bg-slate-50/50 transition">
+
+                <td class="py-4 px-6 font-mono text-xs text-gray-400"
+                    th:text="${cliente.id}">
+                </td>
+
+                <td class="py-4 px-6 font-medium text-[#0f172a]"
+                    th:text="${cliente.cedula}">
+                </td>
+
+                <td class="py-4 px-6"
+                    th:text="${cliente.nombre}">
+                </td>
+
+                <td class="py-4 px-6"
+                    th:text="${cliente.telefono}">
+                </td>
+
+                <td class="py-4 px-6"
+                    th:text="${cliente.direccion}">
+                </td>
+
+                <td class="py-4 px-6"
+                    th:text="${cliente.correo}">
+                </td>
+
+                <td class="py-4 px-6">
+
+                    <div class="flex justify-center gap-2">
+
+                        <a th:href="@{/clientes/editar/{id}(id=${cliente.id})}"
+                           class="bg-amber-100 hover:bg-amber-200 text-amber-700 text-xs font-medium px-3 py-1.5 rounded-lg transition">
 
                             Editar
 
                         </a>
 
-                        <a th:href="@{/clientes/eliminar/{id}(id=${c.id})}"
-                           class="btn btn-danger btn-sm"
-                           onclick="return confirm('¿Estás seguro de eliminar este cliente?')">
+                        <a th:href="@{/clientes/eliminar/{id}(id=${cliente.id})}"
+                           onclick="return confirm('¿Deseas eliminar este cliente?')"
+                           class="bg-red-100 hover:bg-red-200 text-red-700 text-xs font-medium px-3 py-1.5 rounded-lg transition">
 
                             Eliminar
 
                         </a>
 
-                    </td>
+                    </div>
 
-                </tr>
+                </td>
 
-                </tbody>
+            </tr>
 
-            </table>
+            <tr th:if="${#lists.isEmpty(listaClientes)}">
 
-        </div>
+                <td colspan="7"
+                    class="py-12 text-center text-[#94a3b8]">
+
+                    <div class="text-2xl mb-2">
+                        👥
+                    </div>
+
+                    <p>
+                        No hay clientes registrados en el sistema todavía.
+                    </p>
+
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
 
     </div>
 
-</div>
+</main>
 
 </body>
 </html>
