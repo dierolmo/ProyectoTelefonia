@@ -20,7 +20,17 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
+    public Plan buscarPorId(Long id) {
+        return planRepository.findById(id).orElseThrow();
+    }
+
+    @Override
     public Plan guardar(Plan plan) {
         return planRepository.save(plan);
+    }
+
+    @Override
+    public void eliminar(Long id) {
+        planRepository.deleteById(id);
     }
 }
