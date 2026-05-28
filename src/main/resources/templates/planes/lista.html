@@ -23,11 +23,12 @@
           <th>Precio</th>
           <th>Minutos</th>
           <th>Gigas</th>
+          <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
         <tr th:if="${#lists.isEmpty(listaPlanes)}">
-          <td colspan="5" class="text-center text-muted">No hay planes registrados en el sistema.</td>
+          <td colspan="6" class="text-center text-muted">No hay planes registrados en el sistema.</td>
         </tr>
         <tr th:each="p : ${listaPlanes}">
           <td th:text="${p.id}">1</td>
@@ -35,6 +36,11 @@
           <td th:text="'$' + ${p.precio}">$0.0</td>
           <td th:text="${p.minutos}">0</td>
           <td th:text="${p.gigas}">0</td>
+          <td>
+            <a th:href="@{/planes/editar/{id}(id=${p.id})}" class="btn btn-warning btn-sm">Editar</a>
+            <a th:href="@{/planes/eliminar/{id}(id=${p.id})}" class="btn btn-danger btn-sm"
+               onclick="return confirm('¿Estás seguro de eliminar este plan?')">Eliminar</a>
+          </td>
         </tr>
         </tbody>
       </table>

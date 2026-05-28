@@ -30,10 +30,24 @@ public class PlanController {
         return "planes/formulario";
     }
 
-    // Guardar el plan en la base de datos
+    // Guardar el plan en la base de datos (crear o editar)
     @PostMapping("/guardar")
     public String guardarPlan(@ModelAttribute("plan") Plan plan) {
         planService.guardar(plan);
+        return "redirect:/planes";
+    }
+
+    // Mostrar el formulario con los datos del plan a editar
+    @GetMapping("/editar/{id}")
+    public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
+        model.addAttribute("plan", planService.buscarPorId(id));
+        return "planes/formulario";
+    }
+
+    // Eliminar un plan por su id
+    @GetMapping("/eliminar/{id}")
+    public String eliminarPlan(@PathVariable Long id) {
+        planService.eliminar(id);
         return "redirect:/planes";
     }
 }
