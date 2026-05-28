@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>ADJD Telecom - Vendedores</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-[#f8fafc] text-[#1e293b] min-h-screen">
+
+<nav class="bg-[#1e293b] text-white px-8 py-4 flex justify-between items-center shadow-sm">
+  <div class="flex items-center gap-2">
+    <div class="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center font-bold text-sm">ADJD</div>
+    <span class="font-semibold text-lg tracking-tight">ADJD Telecomunicaciones</span>
+  </div>
+  <div class="flex items-center gap-6 text-sm text-gray-300">
+    <a th:href="@{/home}" class="hover:text-white transition">Inicio</a>
+    <a th:href="@{/clientes}" class="hover:text-white transition">Clientes</a>
+    <a th:href="@{/vendedores}" class="text-white font-medium border-b-2 border-white pb-1">Vendedores</a>
+    <a th:href="@{/planes}" class="hover:text-white transition">Planes</a>
+  </div>
+</nav>
+
+<main class="max-w-5xl mx-auto mt-12 px-6">
+
+  <div class="flex justify-between items-center mb-8">
+    <div>
+      <h1 class="text-2xl font-bold text-[#0f172a]">Equipo de Vendedores</h1>
+      <p class="text-sm text-[#64748b]">Administra y monitorea el personal de ventas de la empresa</p>
+    </div>
+    <a th:href="@{/vendedores/nuevo}" class="bg-[#334155] hover:bg-[#1e293b] text-white text-sm font-medium px-5 py-2.5 rounded-xl transition shadow-sm flex items-center gap-2">
+      <span>+</span> Registrar Vendedor
+    </a>
+  </div>
+
+  <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+    <table class="w-full text-left border-collapse">
+      <thead>
+      <tr class="bg-[#f1f5f9] border-b border-gray-100 text-xs font-semibold uppercase tracking-wider text-[#475569]">
+        <th class="py-4 px-6">ID Interno</th>
+        <th class="py-4 px-6">Código de Vendedor</th>
+        <th class="py-4 px-6">Nombre Completo</th>
+      </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100 text-sm text-[#334155]">
+      <tr th:each="vendedor : ${vendedores}" class="hover:bg-slate-50/50 transition">
+        <td class="py-4 px-6 font-mono text-xs text-gray-400" th:text="${vendedor.id}"></td>
+        <td class="py-4 px-6 font-medium text-[#0f172a]" th:text="${vendedor.codigoVendedor}"></td>
+        <td class="py-4 px-6" th:text="${vendedor.nombre}"></td>
+      </tr>
+
+      <tr th:if="${#lists.isEmpty(vendedores)}">
+        <td colspan="3" class="py-12 text-center text-[#94a3b8]">
+          <div class="text-2xl mb-2">👥</div>
+          <p>No hay vendedores registrados en el sistema todavía.</p>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+</body>
+</html>
