@@ -5,6 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
 @Entity
 public class Cliente {
 
@@ -12,10 +15,21 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "La cédula es obligatoria")
     private String cedula;
+
+    @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
+
+    @NotBlank(message = "El teléfono es obligatorio")
     private String telefono;
+
+    private String direccion;
+
+    @NotBlank(message = "El correo es obligatorio")
+    @Email(message = "Correo inválido")
     private String correo;
+
 
     public Cliente() {
     }
@@ -24,6 +38,7 @@ public class Cliente {
         this.cedula = cedula;
         this.nombre = nombre;
         this.telefono = telefono;
+        this.direccion = direccion;
         this.correo = correo;
     }
 
@@ -55,6 +70,14 @@ public class Cliente {
         return telefono;
     }
 
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
@@ -66,4 +89,5 @@ public class Cliente {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
+
 }
